@@ -5,9 +5,9 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
+import HomeScreen from '../screens/HomeScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import { BottomTabParamList, HomeParamList, TabTwoParamList } from '../types';
 
 
 // import (alias) function TabTwoScreen(): JSX.Element
@@ -30,7 +30,7 @@ export default function BottomTabNavigator() {
         name="Home"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <AntDesign name="home" size={24} color={color} />,
+          tabBarIcon: ({ color }) => <AntDesign name="home" size={24} color={color}  style={{marginBottom: 8}}/>,
         }}
       />
       <BottomTab.Screen
@@ -64,19 +64,12 @@ const HomeStack = createStackNavigator<HomeParamList>();
 
 function TabOneNavigator() {
   return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: false }}
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ headerShown: false }}
       />
-      {/* <HomeStack.Screen
-        name="MovieDetailsScreen"
-        component={MovieDetailsScreen}
-        options={{ 
-          title: ''
-         }}
-      /> */}
     </TabOneStack.Navigator>
   );
 }
