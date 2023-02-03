@@ -2,7 +2,7 @@ import React from 'react';
 import { Image } from  'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Text, View } from '../../components/Themed';
-import styles from '../../screens/HomeScreen/styles'
+import styles from './styles';
 
 // {
 //     id: 'episode1',
@@ -29,16 +29,15 @@ const EpisodeItem = (props: EpisodeItemProps) => {
     const { episode } = props;
 
     return (
-        <View>
+        <View style={{ marginVertical: 10}}>
             <View style={styles.row}>
                 <Image style={styles.image} source={{ uri: episode.poster}}></Image>
 
-                <View>
+                <View style={styles.titleContainer}>
                     <Text style={styles.title}>{episode.title}</Text>
                     <Text style={styles.duration}>{episode.duration}</Text>
                 </View>
                 <AntDesign name="download" size={24} color={'white'}/>
-
 
             </View>
 
