@@ -1,10 +1,11 @@
 import React from 'react';
 import { Image, Pressable } from 'react-native';
-import { MaterialIcons, Entypo, AntDesign, Ionicons, Feather } from '@expo/vector-icons';
+import { MaterialIcons, Entypo, AntDesign, Ionicons, Feather, FontAwesome } from '@expo/vector-icons';
 import { Text, View } from '../../components/Themed';
 import styles from './styles';
 
 import movie from '../../assets/data/movie';
+import EpisodeItem from '../../components/EpisodeItem';
 
 const firstEpisode = movie.seasons.items[0].episodes.items[0];
 
@@ -12,7 +13,10 @@ const MoviewDetailsScreen = () => {
   return (
     <View>
           <Image style={styles.image} source={{ uri: firstEpisode.poster }} />
+
           <View style={{ padding: 12 }}>
+            <EpisodeItem episode={firstEpisode} />
+
             <Text style={styles.title}>{movie.title}</Text>
               <View style={{flexDirection: 'row'}}>
                   <Text style={styles.match}>98% match</Text>
@@ -57,7 +61,7 @@ const MoviewDetailsScreen = () => {
                   </View>
 
                   <View style={{alignItems: 'center', marginHorizontal: 20}}>
-                      <Ionicons name="share-social-outline" size={24} color={'white'}/>
+                      <FontAwesome name="send-o" size={24} color={'white'}/>
                       <Text style={{color: 'darkgrey'}}>Share</Text>
                   </View>
               </View>
