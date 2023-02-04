@@ -3,6 +3,7 @@ import { Image } from  'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Text, View } from '../../components/Themed';
 import styles from './styles';
+import { Episode } from '../../types';
 
 // {
 //     id: 'episode1',
@@ -14,15 +15,7 @@ import styles from './styles';
 // }
 
 interface EpisodeItemProps {
-    episode:{
-        id: string,
-        title: string,
-        poster: string;
-        duration: string,
-        plot: string;
-        video: string,
-
-    }
+    episode: Episode;
 }
 
 const EpisodeItem = (props: EpisodeItemProps) => {

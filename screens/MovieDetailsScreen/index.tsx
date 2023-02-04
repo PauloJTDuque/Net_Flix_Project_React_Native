@@ -13,10 +13,13 @@ const firstEpisode = firstSeason.episodes.items[0];
 
 const MoviewDetailsScreen = () => {
   const [currentSeason, setCurrentSeason] = useState(firstSeason);
+  const [currentEpisode, setCurrentEpisode] = useState(firstSeason.episodes.items[0]);
   const seasonNames = movie.seasons.items.map(season => season.name);
   return (
     <View>
-          <Image style={styles.image} source={{ uri: firstEpisode.poster }} />
+          {/* <Image style={styles.image} source={{ uri: firstEpisode.poster }} /> */}
+
+          <VideoPlayer episode={currentEpisode} />
 
           <FlatList 
                 data={currentSeason.episodes.items}
