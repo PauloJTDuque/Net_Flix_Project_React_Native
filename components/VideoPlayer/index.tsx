@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { View, Text } from 'react-native';
 import { Video } from 'expo-av';
 import { Episode } from '../../types';
 import { Playback } from 'expo-av/build/AV';
+import styles from './styles';
 
 interface VideoPlayerProps {
         episode: Episode;
@@ -10,6 +11,9 @@ interface VideoPlayerProps {
 
 const VideoPlayer = (props: VideoPlayerProps) =>{
     const { episode } = props;
+
+    const [status, setStatus] = useState({});
+
     const video = useRef(null);
     
     // const handLeVideoRef = (component: Playback) => {
@@ -29,7 +33,14 @@ const VideoPlayer = (props: VideoPlayerProps) =>{
 
   return (
         <Video 
-            ref={handleVideoRef}
+            ref={video}
+            style={styles.video}
+            source={{
+                uri: episode.video
+            }}
+            useNativeControls
+            resizeMode="contain"
+            onPlaybackStatusUpdate={stayus => setStatus(() => status)}
         />
 }
 
