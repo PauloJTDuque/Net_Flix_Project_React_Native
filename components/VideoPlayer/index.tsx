@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { View, Text } from 'react-native';
 import { Video } from 'expo-av';
 import { Episode } from '../../types';
@@ -7,41 +7,48 @@ import styles from './styles';
 
 interface VideoPlayerProps {
         episode: Episode;
-    }
+}
 
-const VideoPlayer = (props: VideoPlayerProps) =>{
+const VideoPlayer = (props: VideoPlayerProps) => {
     const { episode } = props;
 
     const [status, setStatus] = useState({});
 
-    const video = useRef(null);
+    const video = useRef<Playback>(null);
+
+    useEffect(() =>{
+        if (!video) {
+            return;
+        }
+        (async () => {
+            await video?.current?.unloadAsync();
+            await video?.current?.loadAsync(
+                { uri: episode.video},
+                {},
+                false
+            );
+        })();
+    }, [episode])
     
-    // const handLeVideoRef = (component: Playback) => {
-    //     const playbackObject = component;
-
-    //     const source = {
-    //         uri: episode.video
-    //     };
-
-    //     const initialStatus ={
-
-    //     };
-
-    //     playbackObject.loadAsync(source, initialStatus, false);
-
-    // }
-
-  return (
+    return (
         <Video 
             ref={video}
             style={styles.video}
             source={{
-                uri: episode.video
+                uri: episode.video,
             }}
+            posterSource={{
+                uri: episode.poster,
+            }}
+            posterStyle={{
+                resizeMode: 'cover',
+            }}
+            usePoster={true}
             useNativeControls
-            resizeMode="contain"
-            onPlaybackStatusUpdate={stayus => setStatus(() => status)}
+            resizeMode= "contain"
+            onPlaybackStatusUpdate={status => setStatus(() => status)}
         />
+    )    
 }
 
 export default VideoPlayer;

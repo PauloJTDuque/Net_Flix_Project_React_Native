@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from  'react-native';
+import { Image, Pressable } from  'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Text, View } from '../../components/Themed';
 import styles from './styles';
@@ -16,13 +16,14 @@ import { Episode } from '../../types';
 
 interface EpisodeItemProps {
     episode: Episode;
+    onPress: (episode: Episode ) => {}
 }
 
 const EpisodeItem = (props: EpisodeItemProps) => {
-    const { episode } = props;
+    const { episode, onPress } = props;
 
     return (
-        <View style={{ margin: 10}}>
+        <Pressable style={{ margin: 10}} onPress={() =>onPress(episode)} >
             <View style={styles.row}>
                 <Image style={styles.image} source={{ uri: episode.poster}}></Image>
 
@@ -36,7 +37,7 @@ const EpisodeItem = (props: EpisodeItemProps) => {
 
             <Text style={styles.plot}>{episode.plot}</Text>
         
-        </View>
+        </Pressable>
     )
 }
 export default EpisodeItem;
